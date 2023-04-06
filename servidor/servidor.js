@@ -22,27 +22,46 @@ const io = new Server(servidorHttp);
 export default io;
 
 /*
-Vamos implementar o cadastro em si, pegando os dados do formulario de login e enviando para o servidor para ele reconhecer quem está logado.
+Agora, iremos pegar o token gerado pela branch anterior, enviar para o frontEnd e de alguma forma, guardar 
+este dado no navegador. O token servirá como "crachá" de cada usuario.
 
-Dentro do diretório login, criaremos um arquivo chamado login.js para realizar essa atividade.
+Começaremos a receber o evento de envio do token em login e socket-front-login.js
 
-Feita a autenticação iremos enviar a resposta se foi bem sucedida ou não para o frontend (socket-front-login).
-Faremos o tratamento caso o usuario nem exista no banco de dados.
+Na parte do front-end, criaremos uma pasta chamada útils para criar funções especificas do front
 
-Depois de autenticado, vamos redirecionar para a pagina de documentos.
+Para checarmos se o cookie foi armazenado no navegador, ao lado da URL localhost na pagina, tem um icone "i" e clicar
+em cookies.
 
-Agora iremos deixar o servidor capaz de identificar posteriormente os usuarios que ja foram autenticados
-para eles nao precisarem sempre digitar o login quando quiserem entrar na pagina de documentos (area restrita do sistema que precisa de autenticação)
-Para isso, usaremos JWT(JavaScript Web Token).
+Para manipular o cookie no frontend, precisaremos do valor dele (que está criptografado) para uma pagina "restrita" do 
+aluradocs, pagina de documento por exemplo, que precisa de login para ser acessada.
 
-Dentro da pasta utils iremos criar uma função para criar o JWT
-Precisaremos de mais uma dependencia para o projeto
+Depois dessa implementação pronta, precisamos trabalhar no botão de logout e apagar esse token para o usuario
+deslogar
 
-npm install jsonwebtoken@8.5.1
+Para entender melhor sobre os Cookies:
+https://cursos.alura.com.br/course/websockets-implemente-autenticacao-avance-socket-io/task/119955
 
-Além disso, usaremos a biblioteca .env para guardar algumas informações do jwt
-npm install dotenv@16.0.3
+Mesmo feito tudo isso, se digitarmos a URL da pagina de documentos diretamente, mesmo que não estejamos logados,
+ainda conseguiremos acessar essa aba. Precisaremos restringir essas areas para serem acessadas apenas depois do login.
+Para isso iremos em socket-back.js e implementaremos um middleware para realizar essa função.
 
-Para trabalhar com servidores em locais diferentes, seguir o link:
-https://cursos.alura.com.br/course/websockets-implemente-autenticacao-avance-socket-io/task/119950
+EM seguida, vamos receber essa informação que o usuario nao esta logado e trata-lo no frontend em socket-front-index.js.
+
+Agora iremos criar um diretorio para as funções middlewares para separar o codigo.
+
+O middleware está funcionando poreḿ ele é executado por todas as paginas, inclusiva a pagina de login, impedindo que nós loggemos.
+Para contornar esse problema, utilizaremos o conceito de namespaces para aplicar o middleware em paginas especificas.
+
+Toda a nossa aplicação acontece em um único namespace, iremos criar o namespace /usuarios que tera os proprios clientes, eventos, salas
+e middlewares proprios. Então, iremos colocar nosso middlware de autenticação no namespace de usuarios para chamarmos apenas quando for necessario.
+
+O arquivo socket-back.js esta implementando o novo namespace
+e em socket-front-index.js, iremos referenciar a autenticação para o namespace /usuarios.
+
+Agora voltamos a conseguir fazer autenticação do login, no entando, os documentos não estão sendo autenticados, precisaremos fazer mais uma 
+alteração para pegar os documentos do banco, alteraremos novamente o socket-back.js.
+
+Depois de tudo implementado, tambem precisaremos autenticar a pagina de documentos especificos com o chat. iremos alterar o arquivo
+socket-front-documento
+
 */

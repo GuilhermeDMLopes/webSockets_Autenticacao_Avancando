@@ -8,3 +8,4 @@
 
 - implementandoLogin: pegando os dados do formulario de login e enviando para o servidor, fazemos validação se o usuario existe ou não no banco e criamos um JWT para autenticar o usuario e ele não precisar digitar seu login toda vez que quiser acessar a pagina de documentos. Para linkar frontend e backend em portas/locais diferentes, seguir link: https://cursos.alura.com.br/course/websockets-implemente-autenticacao-avance-socket-io/task/119950
 
+- controlandoAcessos: guardando token no navegador. Criamos um diretório de utils no frontend para fazer controle e gerenciamento de cookies. Fizemos um botao de deslogar e limpar os cookies. Restringimos as páginas restritas da nossa aplicação utilizando JWT. A partir de agora só acessaremos a pagina inicial e cada documento depois do login. Utilizamos middlewares para fazer autenticação e criamos um novo namespace para autenticar apenas as paginas necessárias.
