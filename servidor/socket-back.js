@@ -1,4 +1,3 @@
-//importando dotenv no arquivo ponto de partida da aplicação
 import "dotenv/config";
 
 import registrarEventosCadastro from "./registrarEventos/cadastro.js";
@@ -6,11 +5,19 @@ import registrarEventosDocumento from "./registrarEventos/documento.js";
 import registrarEventosInicio from "./registrarEventos/inicio.js";
 import registrarEventosLogin from "./registrarEventos/login.js";
 import io from "./servidor.js";
+import autorizarUsuario from "./middlewares/autorizarUsuario.js";
+
+const nspUsuarios = io.of("/usuarios");
+
+nspUsuarios.use(autorizarUsuario);
+
+nspUsuarios.on("connection", (socket) => {  
+  registrarEventosInicio(socket, nspUsuarios)
+  registrarEventosDocumento(socket, nspUsuarios)
+})
 
 io.on("connection", (socket) => { 
-  //Reorganizando na ordem de eventos: 
   registrarEventosCadastro(socket, io)
-  //criando registro de evento de login
   registrarEventosLogin(socket, io);
   registrarEventosInicio(socket, io)
   registrarEventosDocumento(socket, io)
