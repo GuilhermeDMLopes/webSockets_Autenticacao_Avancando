@@ -1,6 +1,3 @@
-//Arquivo para armazenar eventos de documentos
-
-//Importando arquivos para documentos
 import {    
     atualizaDocumento,
     encontrarDocumento,

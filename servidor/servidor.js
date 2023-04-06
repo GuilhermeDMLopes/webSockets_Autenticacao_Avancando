@@ -22,23 +22,27 @@ const io = new Server(servidorHttp);
 export default io;
 
 /*
-Iremos separar os eventos de socket-back.js criando um novo diretorio chamado registrarEventos
+Vamos implementar o cadastro em si, pegando os dados do formulario de login e enviando para o servidor para ele reconhecer quem está logado.
 
-Feito isso, realizaremos o cadastro de novos usuarios adicionando o arquivo cadastro.js em public/cadastro.
-Depois de feitas as alterações neste arquivo, vamos renomer todos os arquivos "registrarEventos..." para apenas
-o nome do evento que ele esta registrando
-ex: registrarEventosCadastro.js para apenas cadastro.js.
+Dentro do diretório login, criaremos um arquivo chamado login.js para realizar essa atividade.
 
-Feito isso, vamos linkar os usuarios cadastrados na pagina com o banco de dados. Criaremos o arquivo
-usuariosDb.js.
+Feita a autenticação iremos enviar a resposta se foi bem sucedida ou não para o frontend (socket-front-login).
+Faremos o tratamento caso o usuario nem exista no banco de dados.
 
-Depois de cadastrado, mostrar um alerta no frontEnd de que o usuario foi cadastrado.
-Em seguida, faremos uma validação no banco de dados para não deixar cadastrar usuarios ja cadstrados.
+Depois de autenticado, vamos redirecionar para a pagina de documentos.
 
-Por último, faremos uma proteção de senhas com criptografia.
-Criaremos um diretorio dentro da pasta servidor chamado útils que tera um arquivo para fazer essa criptografia para gente.
+Agora iremos deixar o servidor capaz de identificar posteriormente os usuarios que ja foram autenticados
+para eles nao precisarem sempre digitar o login quando quiserem entrar na pagina de documentos (area restrita do sistema que precisa de autenticação)
+Para isso, usaremos JWT(JavaScript Web Token).
 
-Guardar a hash no banco de dados junto com o “sal” é uma técnica que previne contra ataques rainbow table, que tenta descobrir 
-senhas comuns a partir de hashes comuns. Como a hash guardada é gerada a partir da senha digitada e do sal criado, até mesmo uma 
-senha comum vai gerar uma hash complexa.
+Dentro da pasta utils iremos criar uma função para criar o JWT
+Precisaremos de mais uma dependencia para o projeto
+
+npm install jsonwebtoken@8.5.1
+
+Além disso, usaremos a biblioteca .env para guardar algumas informações do jwt
+npm install dotenv@16.0.3
+
+Para trabalhar com servidores em locais diferentes, seguir o link:
+https://cursos.alura.com.br/course/websockets-implemente-autenticacao-avance-socket-io/task/119950
 */

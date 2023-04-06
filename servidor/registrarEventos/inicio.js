@@ -1,13 +1,9 @@
-//Arquivo para exportar os eventos de obter_documentos, adicionar_documentos
-
-//Fazendo as importações
 import {
     adicionarDocumento,   
     encontrarDocumento,    
     obterDocumentos
   } from "../db/documentosDb.js";
 
-//Precisa receber o socket e o io como parametro
 function registrarEventosInicio (socket, io) {
     socket.on("obter_documentos", async (devolverDocumentos) => {
         const documentos = await obterDocumentos();
