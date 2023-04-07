@@ -20,6 +20,14 @@ function selecionarDocumento(dadosEntrada) {
   });
 }
 
+//Escutando que já existe uma conexão daquele usuario neste documento
+socket.on("usuario_ja_no_documento", () => {
+  //enviando mensagem de que ja existe conexao
+  alert("Documento ja aberto em outra pagina")
+  //Voltando para pagina de documentos
+  window.location.href = "/";
+})
+
 socket.on("usuarios_no_documento", atualizarInterfaceUsuarios)
 
 function emitirTextoEditor(dados) {

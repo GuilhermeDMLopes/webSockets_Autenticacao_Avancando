@@ -1,27 +1,41 @@
-//Arquivo para salvar os usuarios em uma lista
-//Serão uma lista d eobjetos com nome de usuario e nome documento
-//Ex: Essa conexão se refere a este usuario que entrou neste documento
-//UM usuario pode entrar em varios documentos diferentes e cada documento que esse
-//usuario entra, terá uma conexão diferente também.
-
 const conexoesDocumentos = []
 
-//função para adicionar uma conexão na lista
-function adicionarConexao(conexao) {
-    //adicionando na lista
-    conexoesDocumentos.push(conexao)
-
-    //Checando se a lista esta sendo preenchida corretamente
-    //console.log(conexoesDocumentos)
-
+//Verifica se ja existe uma conexão
+function encontrarConexao(nomeDocumento, nomeUsuario) {
+    //Encontrando conexao
+    return conexoesDocumentos.find((conexao) => {
+        //se o item da lista tiver o mesmo nome de documento e o mesmo nome de usuario, quer dizer que existe uma conexão
+        return conexao.nomeDocumento === nomeDocumento && conexao.nomeUsuario === nomeUsuario;
+    });
 }
 
-//Pegando os usurios da lista em um determinado documento
+function adicionarConexao(conexao) {
+    conexoesDocumentos.push(conexao)
+}
+
 function obterUsuariosDocumento(nomeDocumento) {
-    //Retorna a lista filtrada pelo documento recebido por parametro e pegando o nome do usuario
     return conexoesDocumentos
         .filter((conexao) => conexao.nomeDocumento === nomeDocumento)
         .map((conexao) => conexao.nomeUsuario);
 }
 
-export { adicionarConexao, obterUsuariosDocumento };
+//Criando função para remover conexão
+function removerConexao(nomeDocumento, nomeUsuario) {
+    //pegando o indice do elemento que quero remover
+    //callback recebe cada uma das conexoes como parametro
+    const indice = conexoesDocumentos.findIndex((conexao) => {
+        //se o item da lista tiver o mesmo nome de documento e o mesmo nome de usuario, ele encontra o index do item
+        return conexao.nomeDocumento === nomeDocumento && conexao.nomeUsuario === nomeUsuario;
+    });
+
+    //Se ele encontrar o indice
+    if (indice !== -1) {
+        //Pega o indice do elemento que quero remover e a quantidade de elementos que quero remover
+        conexoesDocumentos.splice(indice, 1)
+    }
+
+    //Verificando se remoção esta funcionando
+    console.log(conexoesDocumentos);
+}
+
+export { encontrarConexao, adicionarConexao, obterUsuariosDocumento, removerConexao };
