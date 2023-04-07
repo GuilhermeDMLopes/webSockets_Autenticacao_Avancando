@@ -20,7 +20,3 @@ servidorHttp.listen(porta, () => console.log(`Servidor escutando na porta ${port
 const io = new Server(servidorHttp);
 
 export default io;
-
-/*
-
-*/

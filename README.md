@@ -11,3 +11,8 @@
 - controlandoAcessos: guardando token no navegador. Criamos um diretório de utils no frontend para fazer controle e gerenciamento de cookies. Fizemos um botao de deslogar e limpar os cookies. Restringimos as páginas restritas da nossa aplicação utilizando JWT. A partir de agora só acessaremos a pagina inicial e cada documento depois do login. Utilizamos middlewares para fazer autenticação e criamos um novo namespace para autenticar apenas as paginas necessárias.
 
 - usuarioOnline: mostramos cada usuario que está conectado em cada documento adicionando mais uma função no middleware de autenticação de usuarios. Enviamos para o front um payload com o nome do documento e o nome do usuario. Criamos uma lista para enviar para o front e ele conseguir apresentar o usuario conectado em cada documento na tela.
+
+- finalizandoProjeto: tratamos as saídas dos usuários nas paginas de documentos. Criamos função de desconexão. Verificamos se um usuário já fez conexão e salvamos dados no próprio socket. Link para ver formas de desconectar:
+https://cursos.alura.com.br/course/websockets-implemente-autenticacao-avance-socket-io/task/119969
+
+- projetoFinalizado: todo o projeto sem comentários.
